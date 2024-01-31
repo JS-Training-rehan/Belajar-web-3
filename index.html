@@ -309,6 +309,11 @@
         },
       ];
 
+      //wadah konten sesuai akun
+      let kontenAkun = {};
+      let akunLogin;
+      let deletedItems = [];
+
       function inputLogin() {
         let inputEmail = document.getElementById("input").value;
         let inputPass = document.getElementById("pass").value;
@@ -322,26 +327,33 @@
 
           if (inputEmail === emailUser) {
             emailSesuai = true;
+
             if (inputPass === passUser) {
+              akunLogin = user;
               passwordSesuai = true;
+
+              if (!kontenAkun[user.id]) {
+                kontenAkun[user.id] = [];
+              }
+
               document.getElementById(
                 "judul"
               ).innerText = `Do it now ${user.nama}`;
+              document.querySelector(".container-login").style.display = "none";
+              document.querySelector(".container-regist").style.display =
+                "none";
+              document.querySelector(".container-home").style.display = "flex";
+              kontenTampil(user.id);
               break;
             }
           }
         }
 
-        if (emailSesuai) {
-          if (passwordSesuai) {
-            document.querySelector(".container-login").style.display = "none";
-            document.querySelector(".container-regist").style.display = "none";
-            document.querySelector(".container-home").style.display = "flex";
-          } else {
-            alert("password anda salah!!");
-          }
-        } else {
-          alert("pastikan email sudah terdaftar!!");
+        // tampilkan pesan kesalahan jika login gagal
+        if (!emailSesuai) {
+          alert("Pastikan email sudah terdaftar!!");
+        } else if (!passwordSesuai) {
+          alert("Password Anda salah!!");
         }
       }
 
@@ -357,13 +369,14 @@
         let emailBaru = document.getElementById("email").value;
         let passwordBaru = document.getElementById("password").value;
 
-        let emailTersedia = true;
-
+        // validasi data input
         if (namaBaru === "" || emailBaru === "" || passwordBaru === "") {
-          alert("data belum lengkap");
+          alert("Data belum lengkap");
           return;
         }
 
+        // cek apakah email sudah digunakan
+        let emailTersedia = true;
         for (let i = 0; i < data.length; i++) {
           if (data[i].email === emailBaru) {
             emailTersedia = false;
@@ -372,7 +385,7 @@
         }
 
         if (!emailTersedia) {
-          alert("email ini sudah digunakan");
+          alert("Email ini sudah digunakan");
           return;
         }
 
@@ -383,12 +396,12 @@
           password: passwordBaru,
         };
         data.push(akunBaru);
+
         document.getElementById("judul").innerText = "HALAMAN LOGIN";
         document.querySelector(".container-login").style.display = "flex";
         document.querySelector(".container-regist").style.display = "none";
         document.querySelector(".container-home").style.display = "none";
       }
-
       function punyaAkun() {
         document.getElementById("judul").innerText = "HALAMAN LOGIN";
         document.querySelector(".container-login").style.display = "flex";
@@ -404,9 +417,19 @@
       }
 
       function tambahKonten() {
+        if (!akunLogin) {
+          alert("Anda belum login.");
+          return;
+        }
+
+        //tampilkan konten yang pernah di tambahkan user
+        const konten = kontenAkun[akunLogin.id];
+        konten.forEach((teks, index) => {});
+
         //buat elemen div baru
         const divBaru = document.createElement("div");
         divBaru.classList.add("container-list");
+        divBaru.dataset.index = kontenAkun[akunLogin.id].length - 1;
         const containerTodo = document.getElementById("container-todo");
 
         // elemen div wadah teks dan wadah edit
@@ -415,19 +438,13 @@
 
         // random warna div
         let randomWarna = colorRandom();
-        function colorRandom() {
-          let randomColor = "1234567890ABCDEF";
-          let indexWarna = "#";
-          for (let i = 0; i < 6; i++) {
-            const color = Math.floor(Math.random() * 6) + 1;
-            indexWarna += color;
-          }
-          return indexWarna;
-        }
         divBaru.style.backgroundColor = randomWarna;
 
         // nilai teks dari input
         const teks = document.getElementById("isi").value;
+
+        //tambahkan teks ke dalam akun user
+        kontenAkun[akunLogin.id].push(teks);
 
         // elemen paragraf dan mengisinya dengan teks
         const paragrafBaru = document.createElement("p");
@@ -463,6 +480,7 @@
         // elemen button edit
         const buttonEdit = document.createElement("button");
         buttonEdit.innerHTML = "EDIT";
+
         // klik pada tombol edit
         buttonEdit.addEventListener("click", function () {
           inputEdit.style.display = "flex";
@@ -486,6 +504,102 @@
         // setelah input
         divBaru.style.display = "flex";
         document.getElementById("isi").value = "";
+
+        kontenTampil(akunLogin.id);
+      }
+
+      function kontenTampil(userId) {
+        const containerTodo = document.getElementById("container-todo");
+        //kontainer di kosongkan kalo ganti akun
+        containerTodo.innerHTML = "";
+
+        const konten = kontenAkun[userId];
+        konten.forEach((teks, index) => {
+          //buat elemen div baru
+          const divBaru = document.createElement("div");
+          divBaru.classList.add("container-list");
+
+          // elemen div wadah teks dan wadah edit
+          const divTeks = document.createElement("div");
+          divTeks.classList.add("container-teks");
+
+          // random warna div
+          let randomWarna = colorRandom();
+          divBaru.style.backgroundColor = randomWarna;
+
+          // elemen paragraf dan mengisinya dengan teks
+          const paragrafBaru = document.createElement("p");
+          paragrafBaru.innerHTML = teks;
+
+          // elemen input untuk pengeditan
+          const inputEdit = document.createElement("input");
+          inputEdit.classList.add("input-edit");
+          inputEdit.style.display = "none";
+          inputEdit.placeholder = "Teks baru";
+
+          // elemen button konfirmasi edit
+          const editSubmit = document.createElement("button");
+          editSubmit.classList.add("konfirmasi-edit");
+          editSubmit.innerHTML = "Konfirmasi";
+          editSubmit.style.display = "none";
+
+          // elemen button hapus
+          const buttonHapus = document.createElement("button");
+          buttonHapus.innerHTML = "HAPUS";
+          // Menanggapi klik pada tombol hapus
+          buttonHapus.addEventListener("click", function () {
+            containerTodo.removeChild(divBaru);
+            deletedItems.push(kontenAkun[akunLogin.id][index]);
+            kontenAkun[akunLogin.id].splice(index, 1);
+            kontenTampil(akunLogin.id);
+          });
+
+          // elemen button edit
+          const buttonEdit = document.createElement("button");
+          buttonEdit.innerHTML = "EDIT";
+
+          // klik pada tombol edit
+          buttonEdit.addEventListener("click", function () {
+            inputEdit.style.display = "flex";
+            editSubmit.style.display = "flex";
+          });
+
+          // klik tombol konfirmasi edit
+          editSubmit.addEventListener("click", function () {
+            paragrafBaru.innerHTML = inputEdit.value;
+            inputEdit.style.display = "none";
+            editSubmit.style.display = "none";
+          });
+
+          divTeks.appendChild(paragrafBaru);
+          divTeks.appendChild(inputEdit);
+          divTeks.appendChild(editSubmit);
+          divBaru.appendChild(divTeks);
+
+          //  class untuk button hapus
+          buttonHapus.classList.add("button-hapus");
+          divBaru.appendChild(buttonHapus);
+
+          // class untuk button edit
+          buttonEdit.classList.add("button-edit");
+          divBaru.appendChild(buttonEdit);
+
+          // setelah input
+          divBaru.style.display = "flex";
+
+          // Tambahkan divBaru ke dalam containerTodo
+          containerTodo.appendChild(divBaru);
+        });
+      }
+      function colorRandom() {
+        let randomColor = "1234567890ABCDEF";
+        let indexWarna = "#";
+        for (let i = 0; i < 6; i++) {
+          const color = Math.floor(Math.random() * 6) + 1;
+          indexWarna += color;
+        }
+
+        return indexWarna;
       }
     </script>
   </body>
