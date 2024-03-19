@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        justify-content: center;
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        height: 100%;
+        flex-direction: column;
+      }
+
+      h1 {
+        color: black;
+        text-align: center;
+        margin: 30px;
+      }
+
+      .container-login {
+        justify-content: center;
+        width: 300px;
+        height: 300px;
+        background-color: red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 20px;
+        -webkit-border-radius: 40px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+      }
+      .button-regist {
+        width: 100px;
+        height: 30px;
+      }
+      .container-regist {
+        justify-content: center;
+        width: 300px;
+        height: 300px;
+        background-color: red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 40px;
+        -webkit-border-radius: 40px;
+        -moz-border-radius: 40px;
+        -ms-border-radius: 40px;
+        -o-border-radius: 40px;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+        border-color: black;
+      }
+      input {
+        width: 200px;
+        height: 20px;
+        padding: 10px;
+        margin: 5px;
+        font-size: 10pt;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+      }
+
+      .input-todo {
+        width: 700px;
+        height: 40px;
+        padding: 20px;
+        margin: 5px;
+        font-size: 12pt;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+      }
+
+      button {
+        width: 80px;
+        height: 20px;
+        font-size: 7pt;
+      }
+
+      .container-home {
+        width: 1000px;
+        height: 500px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav {
+        width: 1000px;
+        height: 100px;
+        background-color: red;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+
+      .container-todo {
+        width: 1000px;
+        height: 70px;
+        align-items: left;
+        padding-left: 20px;
+        flex-direction: column;
+        display: flex;
+        grid-column: 10px;
+        margin: 10px;
+      }
+      .container-list {
+        width: 90%;
+        height: 120px;
+        padding: 20px;
+        align-items: center;
+        padding-left: 20px;
+        background-color: whitesmoke;
+        flex-direction: row;
+        display: flex;
+        grid-column: 10px;
+        margin: 10px;
+        box-shadow: #333;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .button-edit {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 40px;
+        color: black;
+        background-color: white;
+        flex-direction: row;
+        display: flex;
+        margin: 10px;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+      .button-hapus {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 40px;
+        color: black;
+        background-color: white;
+        flex-direction: column;
+        display: flex;
+        margin: 10px;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+
+      .container-teks {
+        width: 900px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      p {
+        width: 700px;
+        height: 50px;
+        font-size: 15pt;
+        display: flex;
+        flex-direction: column;
+        color: white;
+      }
+
+      .input-edit {
+        width: 500px;
+        height: 10px;
+        font-size: 12pt;
+        color: black;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <title>TODO</title>
+  </head>
+  <body>
+    <h1 id="judul">HALAMAN LOGIN</h1>
+    <section class="container-login">
+      <h1>LOGIN</h1>
+      <div>
+        <input type="email" id="input" name="inputEmail" placeholder="email" />
+      </div>
+      <div>
+        <input
+          placeholder="password"
+          type="password"
+          id="pass"
+          name="password"
+        />
+      </div>
+      <div>
+        <button class="button-login" id="login" onclick="inputLogin()">
+          LOGIN
+        </button>
+      </div>
+      <div>
+        <button class="button-regist" id="regist" onclick="regist()">
+          BUAT AKUN?
+        </button>
+      </div>
+    </section>
+    <section class="container-regist" style="display: none">
+      <h1>BUAT AKUN</h1>
+      <div>
+        <input placeholder="nama" type="text" id="nama" name="nama" />
+      </div>
+      <div>
+        <input placeholder="email" type="email" id="email" name="email" />
+      </div>
+      <div>
+        <input
+          placeholder="password"
+          type="password"
+          id="password"
+          name="password"
+        />
+      </div>
+      <div>
+        <button class="buat-akun" id="buat-akun" onclick="buatAkun()">
+          BUAT AKUN
+        </button>
+      </div>
+      <div>
+        <button class="punya-akun" id="punya-akun" onclick="punyaAkun()">
+          SUDAH PUNYA
+        </button>
+      </div>
+    </section>
+    <section class="container-home" style="display: none">
+      <nav class="nav">
+        <input
+          class="input-todo"
+          type="isi"
+          id="isi"
+          name="isi"
+          placeholder="tambah list"
+          maxlength="50"
+        />
+        <button id="tambahList" class="button-add" onclick="tambahKonten()">
+          Add
+        </button>
+        <button class="button-logout" id="logout-akun" onclick="logOut()">
+          Log out
+        </button>
+      </nav>
+      <content>
+        <div class="container-todo" id="container-todo">
+          <p class="isi-todo" id="isi-todo"></p>
+        </div>
+      </content>
+    </section>
+
+    <script>
+      let data = [
+        {
+          id: 1,
+          nama: "rehan",
+          email: "rehan@gmail.com",
+          password: "12345",
+        },
+        {
+          id: 2,
+          nama: "aji",
+          email: "aji@gmail.com",
+          password: "12345",
+        },
+      ];
+
+      //wadah konten sesuai akun
+      let kontenAkun = {};
+      let akunLogin;
+      let deletedItems = [];
+
+      function inputLogin() {
+        let inputEmail = document.getElementById("input").value;
+        let inputPass = document.getElementById("pass").value;
+
+        let emailSesuai = false;
+        let passwordSesuai = false;
+
+        for (const user of data) {
+          const emailUser = user.email;
+          const passUser = user.password;
+
+          if (inputEmail === emailUser) {
+            emailSesuai = true;
+
+            if (inputPass === passUser) {
+              akunLogin = user;
+              passwordSesuai = true;
+
+              if (!kontenAkun[user.id]) {
+                kontenAkun[user.id] = [];
+              }
+
+              document.getElementById(
+                "judul"
+              ).innerText = `Do it now ${user.nama}`;
+              document.querySelector(".container-login").style.display = "none";
+              document.querySelector(".container-regist").style.display =
+                "none";
+              document.querySelector(".container-home").style.display = "flex";
+              kontenTampil(user.id);
+              break;
+            }
+          }
+        }
+
+        // tampilkan pesan kesalahan jika login gagal
+        if (!emailSesuai) {
+          alert("Pastikan email sudah terdaftar!!");
+        } else if (!passwordSesuai) {
+          alert("Password Anda salah!!");
+        }
+      }
+
+      function regist() {
+        document.getElementById("judul").innerText = "HALAMAN REGISTRASI";
+        document.querySelector(".container-login").style.display = "none";
+        document.querySelector(".container-regist").style.display = "flex";
+        document.querySelector(".container-home").style.display = "none";
+      }
+
+      function buatAkun() {
+        let namaBaru = document.getElementById("nama").value;
+        let emailBaru = document.getElementById("email").value;
+        let passwordBaru = document.getElementById("password").value;
+
+        // validasi data input
+        if (namaBaru === "" || emailBaru === "" || passwordBaru === "") {
+          alert("Data belum lengkap");
+          return;
+        }
+
+        // cek apakah email sudah digunakan
+        let emailTersedia = true;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].email === emailBaru) {
+            emailTersedia = false;
+            break;
+          }
+        }
+
+        if (!emailTersedia) {
+          alert("Email ini sudah digunakan");
+          return;
+        }
+
+        let akunBaru = {
+          id: data.length + 1,
+          nama: namaBaru,
+          email: emailBaru,
+          password: passwordBaru,
+        };
+        data.push(akunBaru);
+
+        document.getElementById("judul").innerText = "HALAMAN LOGIN";
+        document.querySelector(".container-login").style.display = "flex";
+        document.querySelector(".container-regist").style.display = "none";
+        document.querySelector(".container-home").style.display = "none";
+      }
+      function punyaAkun() {
+        document.getElementById("judul").innerText = "HALAMAN LOGIN";
+        document.querySelector(".container-login").style.display = "flex";
+        document.querySelector(".container-regist").style.display = "none";
+        document.querySelector(".container-home").style.display = "none";
+      }
+
+      function logOut() {
+        document.getElementById("judul").innerText = "HALAMAN LOGIN";
+        document.querySelector(".container-login").style.display = "flex";
+        document.querySelector(".container-regist").style.display = "none";
+        document.querySelector(".container-home").style.display = "none";
+      }
+
+      function tambahKonten() {
+        if (!akunLogin) {
+          alert("Anda belum login.");
+          return;
+        }
+
+        //tampilkan konten yang pernah di tambahkan user
+        const konten = kontenAkun[akunLogin.id];
+        konten.forEach((teks, index) => {});
+
+        //buat elemen div baru
+        const divBaru = document.createElement("div");
+        divBaru.classList.add("container-list");
+        divBaru.dataset.index = kontenAkun[akunLogin.id].length - 1;
+        const containerTodo = document.getElementById("container-todo");
+
+        // elemen div wadah teks dan wadah edit
+        const divTeks = document.createElement("div");
+        divTeks.classList.add("container-teks");
+
+        // random warna div
+        let randomWarna = colorRandom();
+        divBaru.style.backgroundColor = randomWarna;
+
+        // nilai teks dari input
+        const teks = document.getElementById("isi").value;
+
+        //tambahkan teks ke dalam akun user
+        kontenAkun[akunLogin.id].push(teks);
+
+        // elemen paragraf dan mengisinya dengan teks
+        const paragrafBaru = document.createElement("p");
+        paragrafBaru.innerHTML = teks;
+
+        // elemen input untuk pengeditan
+        const inputEdit = document.createElement("input");
+        inputEdit.classList.add("input-edit");
+        inputEdit.style.display = "none";
+        inputEdit.placeholder = "Teks baru";
+
+        // elemen button konfirmasi edit
+        const editSubmit = document.createElement("button");
+        editSubmit.classList.add("konfirmasi-edit");
+        editSubmit.innerHTML = "Konfirmasi";
+        editSubmit.style.display = "none";
+
+        // klik tombol konfirmasi edit
+        editSubmit.addEventListener("click", function () {
+          paragrafBaru.innerHTML = inputEdit.value;
+          inputEdit.style.display = "none";
+          editSubmit.style.display = "none";
+        });
+
+        // elemen button hapus
+        const buttonHapus = document.createElement("button");
+        buttonHapus.innerHTML = "HAPUS";
+        // Menanggapi klik pada tombol hapus
+        buttonHapus.addEventListener("click", function () {
+          containerTodo.removeChild(divBaru);
+        });
+
+        // elemen button edit
+        const buttonEdit = document.createElement("button");
+        buttonEdit.innerHTML = "EDIT";
+
+        // klik pada tombol edit
+        buttonEdit.addEventListener("click", function () {
+          inputEdit.style.display = "flex";
+          editSubmit.style.display = "flex";
+        });
+
+        divTeks.appendChild(paragrafBaru);
+        divTeks.appendChild(inputEdit);
+        divTeks.appendChild(editSubmit);
+        divBaru.appendChild(divTeks);
+        containerTodo.appendChild(divBaru);
+
+        //  class untuk button hapus
+        buttonHapus.classList.add("button-hapus");
+        divBaru.appendChild(buttonHapus);
+
+        // class untuk button edit
+        buttonEdit.classList.add("button-edit");
+        divBaru.appendChild(buttonEdit);
+
+        // setelah input
+        divBaru.style.display = "flex";
+        document.getElementById("isi").value = "";
+
+        kontenTampil(akunLogin.id);
+      }
+
+      function kontenTampil(userId) {
+        const containerTodo = document.getElementById("container-todo");
+        //kontainer di kosongkan kalo ganti akun
+        containerTodo.innerHTML = "";
+
+        const konten = kontenAkun[userId];
+        konten.forEach((teks, index) => {
+          //buat elemen div baru
+          const divBaru = document.createElement("div");
+          divBaru.classList.add("container-list");
+
+          // elemen div wadah teks dan wadah edit
+          const divTeks = document.createElement("div");
+          divTeks.classList.add("container-teks");
+
+          // random warna div
+          let randomWarna = colorRandom();
+          divBaru.style.backgroundColor = randomWarna;
+
+          // elemen paragraf dan mengisinya dengan teks
+          const paragrafBaru = document.createElement("p");
+          paragrafBaru.innerHTML = teks;
+
+          // elemen input untuk pengeditan
+          const inputEdit = document.createElement("input");
+          inputEdit.classList.add("input-edit");
+          inputEdit.style.display = "none";
+          inputEdit.placeholder = "Teks baru";
+
+          // elemen button konfirmasi edit
+          const editSubmit = document.createElement("button");
+          editSubmit.classList.add("konfirmasi-edit");
+          editSubmit.innerHTML = "Konfirmasi";
+          editSubmit.style.display = "none";
+
+          // elemen button hapus
+          const buttonHapus = document.createElement("button");
+          buttonHapus.innerHTML = "HAPUS";
+          // Menanggapi klik pada tombol hapus
+          buttonHapus.addEventListener("click", function () {
+            containerTodo.removeChild(divBaru);
+            deletedItems.push(kontenAkun[akunLogin.id][index]);
+            kontenAkun[akunLogin.id].splice(index, 1);
+            kontenTampil(akunLogin.id);
+          });
+
+          // elemen button edit
+          const buttonEdit = document.createElement("button");
+          buttonEdit.innerHTML = "EDIT";
+
+          // klik pada tombol edit
+          buttonEdit.addEventListener("click", function () {
+            inputEdit.style.display = "flex";
+            editSubmit.style.display = "flex";
+          });
+
+          // klik tombol konfirmasi edit
+          editSubmit.addEventListener("click", function () {
+            paragrafBaru.innerHTML = inputEdit.value;
+            inputEdit.style.display = "none";
+            editSubmit.style.display = "none";
+          });
+
+          divTeks.appendChild(paragrafBaru);
+          divTeks.appendChild(inputEdit);
+          divTeks.appendChild(editSubmit);
+          divBaru.appendChild(divTeks);
+
+          //  class untuk button hapus
+          buttonHapus.classList.add("button-hapus");
+          divBaru.appendChild(buttonHapus);
+
+          // class untuk button edit
+          buttonEdit.classList.add("button-edit");
+          divBaru.appendChild(buttonEdit);
+
+          // setelah input
+          divBaru.style.display = "flex";
+
+          // Tambahkan divBaru ke dalam containerTodo
+          containerTodo.appendChild(divBaru);
+        });
+      }
+      function colorRandom() {
+        let randomColor = "1234567890ABCDEF";
+        let indexWarna = "#";
+        for (let i = 0; i < 6; i++) {
+          const color = Math.floor(Math.random() * 6) + 1;
+          indexWarna += color;
+        }
+
+        return indexWarna;
+      }
+    </script>
+  </body>
+</html>
